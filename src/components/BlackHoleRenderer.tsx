@@ -13,10 +13,12 @@ import {
   DISK_TEMPERATURE_INNER_K,
   DISK_TEMPERATURE_OUTER_K,
 } from "../utils/constants";
+import { useQualityTier } from "../hooks/useQualityTier";
 
 export function BlackHoleRenderer() {
   const meshRef = useRef<THREE.Mesh>(null);
   const { camera, size } = useThree();
+  const quality = useQualityTier();
 
   const uniforms = useMemo(
     () => ({
@@ -58,6 +60,7 @@ export function BlackHoleRenderer() {
       .multiply(camera.matrixWorld);
     mat.uniforms.uTime.value = performance.now() / 1000;
     mat.uniforms.uResolution.value = [size.width, size.height];
+    mat.uniforms.uMaxSteps.value = quality.maxSteps;
   });
 
   return (
