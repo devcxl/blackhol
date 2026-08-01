@@ -1,0 +1,9 @@
+export const RS = 1;
+export const EVENT_HORIZON_RADIUS = RS;
+export const INNER_DISK_RADIUS = 3 * RS;
+export const OUTER_DISK_RADIUS = 30 * RS;
+export const DISK_HALF_THICKNESS = 0.3;
+export const DISK_TEMPERATURE_INNER_K = 10_000;
+export const DISK_TEMPERATURE_OUTER_K = 3_000;
+export const MAX_RAYMARCH_STEPS_HIGH = 64;
+export const MAX_RAYMARCH_STEPS_LOW = 32;

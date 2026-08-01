@@ -1,9 +1,5 @@
-import { Canvas } from "@react-three/fiber";
+import { BlackHoleScene } from "./components/BlackHoleScene";
 
 export function App() {
-  return (
-    <Canvas>
-      <ambientLight intensity={0.1} />
-    </Canvas>
-  );
+  return <BlackHoleScene />;
 }
