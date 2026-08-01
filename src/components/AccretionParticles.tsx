@@ -2,19 +2,20 @@ import { useRef, useMemo } from "react";
 import { useFrame } from "@react-three/fiber";
 import * as THREE from "three";
 import { RS, INNER_DISK_RADIUS, OUTER_DISK_RADIUS } from "../utils/constants";
-
-const PARTICLE_COUNT = 500;
+import { useQualityTier } from "../hooks/useQualityTier";
 
 export function AccretionParticles() {
   const pointsRef = useRef<THREE.Points>(null);
+  const quality = useQualityTier();
+  const particleCount = quality.particleCount;
 
   const { positions, colors, velocities, angles } = useMemo(() => {
-    const pos = new Float32Array(PARTICLE_COUNT * 3);
-    const col = new Float32Array(PARTICLE_COUNT * 3);
+    const pos = new Float32Array(particleCount * 3);
+    const col = new Float32Array(particleCount * 3);
     const vel: number[] = [];
     const ang: number[] = [];
 
-    for (let i = 0; i < PARTICLE_COUNT; i++) {
+    for (let i = 0; i < particleCount; i++) {
       const radius = INNER_DISK_RADIUS + Math.random() * (OUTER_DISK_RADIUS - INNER_DISK_RADIUS);
       const angle = Math.random() * Math.PI * 2;
       const y = (Math.random() - 0.5) * 0.15;
@@ -49,7 +50,7 @@ export function AccretionParticles() {
     const posAttr = pointsRef.current.geometry.attributes.position;
     const arr = posAttr.array as Float32Array;
 
-    for (let i = 0; i < PARTICLE_COUNT; i++) {
+    for (let i = 0; i < particleCount; i++) {
       const radius = Math.sqrt(arr[i * 3] ** 2 + arr[i * 3 + 2] ** 2);
       const angularSpeed = 0.3 / Math.sqrt(radius / RS);
       angles[i] += angularSpeed * delta * velocities[i];
