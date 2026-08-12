@@ -4,10 +4,10 @@ export function PostProcessing() {
   return (
     <EffectComposer>
       <Bloom
-        luminanceThreshold={0.4}
-        luminanceSmoothing={0.3}
-        intensity={1.2}
-        radius={0.5}
+        luminanceThreshold={0.72}
+        luminanceSmoothing={0.1}
+        intensity={1.1}
+        radius={0.4}
       />
     </EffectComposer>
   );

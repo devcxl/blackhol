@@ -6,14 +6,14 @@ describe("detectQualityTier", () => {
     vi.stubGlobal("navigator", { userAgent: "Chrome", devicePixelRatio: 1.5 });
     const config = detectQualityTier();
     expect(config.tier).toBe("HIGH");
-    expect(config.maxSteps).toBe(64);
+    expect(config.maxSteps).toBe(224);
   });
 
   it("returns LOW tier on mobile", () => {
     vi.stubGlobal("navigator", { userAgent: "Mobi", devicePixelRatio: 2 });
     const config = detectQualityTier();
     expect(config.tier).toBe("LOW");
-    expect(config.maxSteps).toBe(32);
+    expect(config.maxSteps).toBe(144);
   });
 
   it("caps DPR on mobile", () => {

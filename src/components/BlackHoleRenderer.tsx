@@ -55,9 +55,10 @@ export function BlackHoleRenderer() {
     if (!meshRef.current) return;
     const mat = meshRef.current.material as THREE.ShaderMaterial;
     mat.uniforms.uCameraPos.value.copy(camera.position);
+    // 世界坐标 = matrixWorld · projectionMatrixInverse · NDC（V⁻¹·P⁻¹ 顺序）
     mat.uniforms.uInvProjViewMatrix.value
-      .copy(camera.projectionMatrixInverse)
-      .multiply(camera.matrixWorld);
+      .copy(camera.matrixWorld)
+      .multiply(camera.projectionMatrixInverse);
     mat.uniforms.uTime.value = performance.now() / 1000;
     mat.uniforms.uResolution.value = [size.width, size.height];
     mat.uniforms.uMaxSteps.value = quality.maxSteps;
