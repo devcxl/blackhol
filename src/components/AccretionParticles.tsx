@@ -18,7 +18,8 @@ export function AccretionParticles() {
     for (let i = 0; i < particleCount; i++) {
       const radius = INNER_DISK_RADIUS + Math.random() * (OUTER_DISK_RADIUS - INNER_DISK_RADIUS);
       const angle = Math.random() * Math.PI * 2;
-      const y = (Math.random() - 0.5) * 0.15;
+      // 上下抖动覆盖并超出盘半厚（0.5），使粒子在盘面上下两侧可见
+      const y = (Math.random() - 0.5) * 1.4;
 
       pos[i * 3] = Math.cos(angle) * radius;
       pos[i * 3 + 1] = y;
@@ -36,7 +37,7 @@ export function AccretionParticles() {
     }
 
     return { positions: pos, colors: col, velocities: vel, angles: ang };
-  }, []);
+  }, [particleCount]);
 
   const geometry = useMemo(() => {
     const geo = new THREE.BufferGeometry();
@@ -75,12 +76,12 @@ export function AccretionParticles() {
   return (
     <points ref={pointsRef} geometry={geometry}>
       <pointsMaterial
-        size={0.05}
+        size={0.045}
         vertexColors
         blending={THREE.AdditiveBlending}
         depthWrite={false}
         transparent
-        opacity={0.6}
+        opacity={0}
       />
     </points>
   );

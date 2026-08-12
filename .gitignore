@@ -1,0 +1,9 @@
+node_modules/
+dist/
+tsconfig.tsbuildinfo
+
+# playwright-cli 浏览器自动化会话产物（截图/快照/控制台日志）
+.playwright-cli/
+
+# opencode 会话本地状态
+.opencode/
